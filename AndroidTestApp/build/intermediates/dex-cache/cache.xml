@@ -3,21 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="/Users/connerlacy/Desktop/MyApplication/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="2af7c7028a8c735ba3cbe0d70c6cae02e6ac1e41">
-        <dex dex="/Users/connerlacy/Desktop/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_862e39627e0c8afbd87b9d83178781b3aef7aa3a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/connerlacy/Desktop/MyApplication/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="/Users/connerlacy/Documents/emergent.io/Repositories/daydream_osc/AndroidTestApp/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="/Users/connerlacy/Desktop/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_ad8590bc790cd0e8a3848541064b606ce2c5c15b/classes.dex" />
+        <dex dex="/Users/connerlacy/Documents/emergent.io/Repositories/daydream_osc/AndroidTestApp/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_dfdf8a3761107073330c0f8c2ed91bbc010642ec/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/connerlacy/Documents/emergent.io/Repositories/daydream_osc/AndroidTestApp/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c7f2c10b3402b9443e919733fefbda5748bc5aec">
+        <dex dex="/Users/connerlacy/Documents/emergent.io/Repositories/daydream_osc/AndroidTestApp/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_387faf2d375b7d42bda6b342ea4289d6958b53ff/classes.dex" />
     </item>
 
 </items>
