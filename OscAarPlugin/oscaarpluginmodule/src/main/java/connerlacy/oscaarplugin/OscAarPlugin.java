@@ -22,8 +22,6 @@ public class OscAarPlugin
         return "hi";
     }
 
-
-
     private static Thread oscOutputThread = new Thread() {
         @Override
         public void run() {
@@ -111,5 +109,20 @@ public class OscAarPlugin
     public static void startOSC()
     {
         oscOutputThread.start();
+
+        try
+        {
+            OSCPortIn receiver = new OSCPortIn(6666);
+            OSCListener listener = new OSCListener() {
+                public void acceptMessage(Date time, OSCMessage message) {
+                    Log.d("Receiving Messages: ", "");
+                }
+            };
+            receiver.addListener("/testin", listener);
+            receiver.startListening();
+        }
+        catch (SocketException e) {
+            Log.d("OSCSendInitalisation", "Socket exception error!");
+        }
     }
 }
