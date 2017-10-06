@@ -7,6 +7,9 @@ import java.net.SocketException;
 import java.net.*;
 import java.util.*;
 
+import static connerlacy.oscaarplugin.OscMessageUnityContainer.oscMessages;
+
+
 /**
  * Created by connerlacy on 9/29/17.
  */
@@ -115,7 +118,8 @@ public class OscAarPlugin
             OSCPortIn receiver = new OSCPortIn(6666);
             OSCListener listener = new OSCListener() {
                 public void acceptMessage(Date time, OSCMessage message) {
-                    Log.d("Receiving Messages: ", "");
+                    OscMessageUnityContainer omuc.oscMessages.add(message);
+
                 }
             };
             receiver.addListener("/testin", listener);
@@ -124,5 +128,10 @@ public class OscAarPlugin
         catch (SocketException e) {
             Log.d("OSCSendInitalisation", "Socket exception error!");
         }
+    }
+
+    public static List<Object> getMessages()
+    {
+
     }
 }
