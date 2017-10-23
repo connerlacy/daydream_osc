@@ -16,14 +16,11 @@ import static connerlacy.oscaarplugin.OscMessageUnityContainer.oscMessages;
 
 public class OscAarPlugin
 {
-    private static String     ip         = "192.168.1.129";
+    private static String     ip         = "192.168.1.175";
     private static int        outputPort = 7777;
     private static OSCPortOut oscPortOut;
 
-    public static String hi()
-    {
-        return "hi";
-    }
+    public static  OscMessageUnityContainer omuc;
 
     private static Thread oscOutputThread = new Thread() {
         @Override
@@ -118,8 +115,7 @@ public class OscAarPlugin
             OSCPortIn receiver = new OSCPortIn(6666);
             OSCListener listener = new OSCListener() {
                 public void acceptMessage(Date time, OSCMessage message) {
-                    OscMessageUnityContainer omuc.oscMessages.add(message);
-
+                    omuc.oscMessages.add(message);
                 }
             };
             receiver.addListener("/testin", listener);
@@ -130,8 +126,23 @@ public class OscAarPlugin
         }
     }
 
-    public static List<Object> getMessages()
+    public static int getNumMessages()
     {
+        return omuc.getNumMessages();
+    }
 
+    public static void clearMessages()
+    {
+        omuc.oscMessages.clear();
+    }
+
+    public static String getMessageAddress(int index)
+    {
+        return omuc.getMessageAddress(index);
+    }
+
+    public static float getMessageFloat(int index)
+    {
+        return omuc.getMessageFloatArg(index);
     }
 }
