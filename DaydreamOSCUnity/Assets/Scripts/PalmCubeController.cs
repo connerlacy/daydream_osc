@@ -33,16 +33,22 @@ public class PalmCubeController : MonoBehaviour
 			{
 				val  = pluginClass.CallStatic<float> ("getMessageFloat", i);
 				pitch = val;
-				winText.text = addr + " " + val.ToString();
-				break;
+			}
+
+			if (addr == "/roll")
+			{
+				val  = pluginClass.CallStatic<float> ("getMessageFloat", i);
+				roll = val;
+			}
+
+			if (addr == "/yaw")
+			{
+				val  = pluginClass.CallStatic<float> ("getMessageFloat", i);
+				yaw = val;
 			}
 		}
-
-
-
+			
 		pluginClass.CallStatic ("clearMessages");
-
-
 
 	}
 
@@ -51,5 +57,4 @@ public class PalmCubeController : MonoBehaviour
 		transform.eulerAngles = new Vector3(0, 0, pitch * 180.0f);
 
 	}
-		
 }
