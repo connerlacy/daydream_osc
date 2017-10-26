@@ -11,6 +11,8 @@ public class PalmCubeController : MonoBehaviour
 	public float roll;
 	public float yaw;
 
+	private float radToDeg = 180.0f / Mathf.PI;
+
 	public  Text winText;
 
 	void Start()
@@ -54,7 +56,6 @@ public class PalmCubeController : MonoBehaviour
 
 	void Update()
 	{
-		transform.eulerAngles = new Vector3(0, 0, pitch * 180.0f);
-
+		transform.eulerAngles = new Vector3(pitch * radToDeg, yaw * radToDeg, roll * radToDeg);
 	}
 }

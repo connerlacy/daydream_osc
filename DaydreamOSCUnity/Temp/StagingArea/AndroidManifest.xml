@@ -35,7 +35,7 @@
       </intent-filter>
     </activity>
     <meta-data android:name="unityplayer.SkipPermissionsDialog" android:value="true" />
-    <meta-data android:name="unity.build-id" android:value="c6eb14b3-926a-4640-8c48-fe394eb6ae95" />
+    <meta-data android:name="unity.build-id" android:value="3e7a642e-0af2-4418-a98b-29337c96dbe1" />
     <meta-data android:name="unity.splash-mode" android:value="0" />
     <meta-data android:name="unity.splash-enable" android:value="False" />
   </application>
