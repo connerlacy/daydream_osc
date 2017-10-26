@@ -10,18 +10,17 @@ public class PlayerController : MonoBehaviour {
 	public  float     speed = 10.0f;
 	public  Text      countText;
 	public  Text      winText;
-	public static AndroidJavaClass pluginClass;
+	//public static AndroidJavaClass pluginClass;
+	public float f;
 
 	void Start()
 	{
-		pluginClass = new AndroidJavaClass("connerlacy.oscaarplugin.OscAarPlugin");
-		pluginClass.CallStatic ("startOSC");
+		//pluginClass = new AndroidJavaClass("connerlacy.oscaarplugin.OscAarPlugin");
+		//pluginClass.CallStatic ("startOSC");
 		rb = GetComponent<Rigidbody> ();
 		setCountText ();
 		winText.text = "";
-
 	}
-
 
 	void FixedUpdate()
 	{
@@ -37,18 +36,20 @@ public class PlayerController : MonoBehaviour {
 			//pluginClass.CallStatic("printLog");
 			//AndroidJavaClass pluginClass = new AndroidJavaClass("connerlacy.oscaarplugin.OscAarPlugin");
 			//winText.text = pluginClass.CallStatic<string>("getMessage");
-			int numMessages = pluginClass.CallStatic<int>("getNumMessages");
-			string addr = "";
-			float  val  = 0.0f;
 
-			for (int i = 0; i < numMessages; i++)
-			{
-				addr = pluginClass.CallStatic<string> ("getMessageAddress", i);
-				val  = pluginClass.CallStatic<float> ("getMessageFloat", i);
-			}
-
-			winText.text = addr + " " + val.ToString();
 		}
+
+		int numMessages = 0; // pluginClass.CallStatic<int>("getNumMessages");
+		string addr = "";
+		float  val  = 0.0f;
+
+		for (int i = 0; i < numMessages; i++)
+		{
+			//addr = pluginClass.CallStatic<string> ("getMessageAddress", i);
+			//val  = pluginClass.CallStatic<float> ("getMessageFloat", i);
+		}
+
+		winText.text = addr + " " + val.ToString();
 	}
 
 	void OnTriggerEnter(Collider other)

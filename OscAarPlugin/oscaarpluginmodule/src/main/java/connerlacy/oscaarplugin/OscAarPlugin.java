@@ -118,7 +118,7 @@ public class OscAarPlugin
                     omuc.oscMessages.add(message);
                 }
             };
-            receiver.addListener("/testin", listener);
+            receiver.addListener("*", listener);
             receiver.startListening();
         }
         catch (SocketException e) {
