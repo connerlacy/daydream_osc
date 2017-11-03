@@ -3,6 +3,8 @@ package connerlacy.oscaarplugin;
 import android.util.Log;
 
 import com.illposed.osc.*;
+
+import java.io.IOException;
 import java.net.SocketException;
 import java.net.*;
 import java.util.*;
@@ -16,7 +18,7 @@ import static connerlacy.oscaarplugin.OscMessageUnityContainer.oscMessages;
 
 public class OscAarPlugin
 {
-    private static String     ip         = "192.168.1.175";
+    private static String     ip         = "255.255.255.255";
     private static int        outputPort = 7777;
     private static OSCPortOut oscPortOut;
 
@@ -108,7 +110,24 @@ public class OscAarPlugin
 
     public static void startOSC()
     {
-        oscOutputThread.start();
+        //oscOutputThread.start();
+
+        Log.d("DEBUG", "Starting OSC Output thread...");
+
+        try {
+            // Connect to some IP address and port
+            Log.d("DEBUG", "Creating OSC output port");
+            oscPortOut = new OSCPortOut(InetAddress.getByName(ip), outputPort);
+
+        } catch(UnknownHostException e) {
+            // Error handling when your IP isn't found
+            Log.d("DEBUG IP", e.toString());
+            return;
+        } catch(Exception e) {
+            // Error handling for any other errors
+            Log.d("DEBUG",e.toString());
+            return;
+        }
 
         try
         {
@@ -144,5 +163,21 @@ public class OscAarPlugin
     public static float getMessageFloat(int index)
     {
         return omuc.getMessageFloatArg(index);
+    }
+
+    public static void sendTriggerMessage(int note, int velocity)
+    {
+        Object[] thingsToSend = new Object[2];
+        thingsToSend[0] = note;
+        thingsToSend[1] = velocity;
+        OSCMessage message = new OSCMessage("/note", Arrays.asList(thingsToSend));
+        try
+        {
+            oscPortOut.send(message);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }
