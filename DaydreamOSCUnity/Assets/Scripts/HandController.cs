@@ -160,6 +160,17 @@ public class HandController : MonoBehaviour
 		if (id / 2 == 4)
 		{
 			//Thumb
+			// If odd, it's the knuckle
+			if ( (id % 2) == 1) 
+			{
+				fingers [id / 2].knuckleT.localEulerAngles = new Vector3 (0, value, 0);
+			}
+			else
+			{
+				Vector3 v = new Vector3 (0, value, 0);
+				fingers [id / 2].j1T.localEulerAngles = v;
+				fingers [id / 2].j2T.localEulerAngles = v;
+			}
 		}
 		else
 		{
