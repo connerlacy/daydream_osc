@@ -8,6 +8,8 @@ class Finger
 	public Transform knuckleT;
 	public Transform j1T;
 	public Transform j2T;
+	public bool onOff = false;
+	public int index = -1;
 } 
 
 
@@ -17,6 +19,7 @@ public class HandController : MonoBehaviour
 
 	public static AndroidJavaClass pluginClass;
 	private Dictionary<string, int> dictionary;
+	public WindZone wind;
 
 	public float pitch;
 	public float roll;
@@ -32,10 +35,16 @@ public class HandController : MonoBehaviour
 
 	private float radToDeg = 180.0f / Mathf.PI;
 
-	public  Text winText;
+	public float xThresh;
 
 	public GameObject hand;
 	private Vector3 imu;
+
+	public GameObject index_ps;
+	public GameObject middle_ps;
+	public GameObject ring_ps;
+	public GameObject pinky_ps;
+	List<GameObject> ps;
 
 	void Start()
 	{
@@ -53,34 +62,45 @@ public class HandController : MonoBehaviour
 		fingers = new List<Finger> ();
 
 		pinky = new Finger ();
+		pinky.index = 4;
 		pinky.knuckleT = hand.transform.Find("Pinky");
 		pinky.j1T = hand.transform.Find("Pinky/Joint0");
 		pinky.j2T = hand.transform.Find("Pinky/Joint0/Joint1");
 		fingers.Add (pinky);
 
 		ring = new Finger ();
+		ring.index = 3;
 		ring.knuckleT = hand.transform.Find("Ring");
 		ring.j1T = hand.transform.Find("Ring/Joint0");
 		ring.j2T = hand.transform.Find("Ring/Joint0/Joint1");
 		fingers.Add (ring);
 
 		middle = new Finger ();
+		middle.index = 2;
 		middle.knuckleT = hand.transform.Find("Middle");
 		middle.j1T = hand.transform.Find("Middle/Joint0");
 		middle.j2T = hand.transform.Find("Middle/Joint0/Joint1");
 		fingers.Add (middle);
 
 		index = new Finger ();
+		index.index = 1;
 		index.knuckleT = hand.transform.Find("Index");
 		index.j1T = hand.transform.Find("Index/Joint0");
 		index.j2T = hand.transform.Find("Index/Joint0/Joint1");
 		fingers.Add (index);
 
 		thumb = new Finger ();
+		thumb.index = 0;
 		thumb.knuckleT = hand.transform.Find("Thumb");
 		thumb.j1T = hand.transform.Find("Thumb/Joint0");
 		thumb.j2T = hand.transform.Find("Thumb/Joint0/Joint1");
 		fingers.Add (thumb);
+
+		ps = new List<GameObject> ();
+		ps.Add (index_ps);
+		ps.Add (middle_ps);
+		ps.Add (ring_ps);
+		ps.Add (pinky_ps);
 
 		//imu = new Vector3 ();
 	}
@@ -96,7 +116,8 @@ public class HandController : MonoBehaviour
 			addr = pluginClass.CallStatic<string>("getMessageAddress", i);
 			val  = pluginClass.CallStatic<float> ("getMessageFloat", i);
 
-			if (dictionary.ContainsKey (addr)) {
+			if (dictionary.ContainsKey (addr)) 
+			{
 				setFingerValue (dictionary [addr], val);
 			}
 			else
@@ -118,6 +139,7 @@ public class HandController : MonoBehaviour
 				if (addr == "/yaw")
 				{
 					val  = pluginClass.CallStatic<float> ("getMessageFloat", i);
+					wind.windTurbulence = val * 20.0f;
 					yaw = val;
 					continue;
 				}
@@ -153,6 +175,22 @@ public class HandController : MonoBehaviour
 				fingers [id / 2].j2T.localEulerAngles = v;
 			}
 		}
+
+		foreach (var f in fingers)
+		{
+			var xSum = f.knuckleT.localEulerAngles.x + f.j1T.localEulerAngles.x + f.j2T.localEulerAngles.x;
+
+			if (!f.onOff && xSum > xThresh) {
+				f.onOff = true;
+				keyTrigger (f.index, 100);
+			} 
+			else if (f.onOff && xSum < (xThresh - 10))
+			{
+				f.onOff = false;
+			}
+
+
+		}
 	}
 
 	void OnCollisionEnter(Collision collision)
@@ -170,5 +208,11 @@ public class HandController : MonoBehaviour
 	public void keyTrigger(int note, int velocity)
 	{
 		pluginClass.CallStatic ("sendTriggerMessage", note, velocity);
+
+		if (note < 4)
+		{
+			GameObject go = Instantiate (ps[note], fingers[fingers.Count - (note + 1)].j2T.position, Quaternion.Euler(new Vector3(45,0,0))) as GameObject;
+			Destroy (go, 2);
+		}
 	}
 }

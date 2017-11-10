@@ -12,6 +12,8 @@
 /Users/connerlacy/Documents/emergent.io/Repositories/daydream_osc/DaydreamOSCUnity/Temp/bin/Debug/UnityEngine.Analytics.dll
 /Users/connerlacy/Documents/emergent.io/Repositories/daydream_osc/DaydreamOSCUnity/Temp/bin/Debug/UnityEngine.HoloLens.dll
 /Users/connerlacy/Documents/emergent.io/Repositories/daydream_osc/DaydreamOSCUnity/Temp/bin/Debug/Google.ProtocolBuffers.dll
+/Users/connerlacy/Documents/emergent.io/Repositories/daydream_osc/DaydreamOSCUnity/Temp/bin/Debug/Assembly-CSharp-firstpass.dll
+/Users/connerlacy/Documents/emergent.io/Repositories/daydream_osc/DaydreamOSCUnity/Temp/bin/Debug/Assembly-CSharp-firstpass.dll.mdb
 /Users/connerlacy/Documents/emergent.io/Repositories/daydream_osc/DaydreamOSCUnity/Temp/bin/Debug/Mono.Cecil.dll
 /Users/connerlacy/Documents/emergent.io/Repositories/daydream_osc/DaydreamOSCUnity/Temp/bin/Debug/Unity.SerializationLogic.dll
 /Users/connerlacy/Documents/emergent.io/Repositories/daydream_osc/DaydreamOSCUnity/Temp/bin/Debug/Unity.DataContract.dll
