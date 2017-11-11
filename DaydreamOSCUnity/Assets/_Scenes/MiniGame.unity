@@ -3193,7 +3193,7 @@ MonoBehaviour:
   pitch: 0
   roll: 0
   yaw: 0
-  xThresh: 50
+  xThresh: 18.1
   hand: {fileID: 151342441}
   index_ps: {fileID: 1298551334}
   middle_ps: {fileID: 308696591}

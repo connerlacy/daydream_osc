@@ -189,7 +189,16 @@ public class HandController : MonoBehaviour
 
 		foreach (var f in fingers)
 		{
-			var xSum = f.knuckleT.localEulerAngles.x + f.j1T.localEulerAngles.x + f.j2T.localEulerAngles.x;
+			float xSum;//= f.knuckleT.localEulerAngles.x + f.j1T.localEulerAngles.x + f.j2T.localEulerAngles.x;
+
+			if (f.index == 0) 
+			{ //Thumb
+				xSum = f.knuckleT.localEulerAngles.y + f.j1T.localEulerAngles.y + f.j2T.localEulerAngles.y;	
+			}
+			else
+			{
+				xSum = f.knuckleT.localEulerAngles.x + f.j1T.localEulerAngles.x + f.j2T.localEulerAngles.x;
+			}
 
 			if (!f.onOff && xSum > xThresh) {
 				f.onOff = true;
