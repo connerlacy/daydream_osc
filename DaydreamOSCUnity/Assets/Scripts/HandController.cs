@@ -154,8 +154,9 @@ public class HandController : MonoBehaviour
 
 	void Update()
 	{
-		//this.transform.eulerAngles = new Vector3(-roll * radToDeg, pitch * radToDeg, yaw * radToDeg );
-		this.transform.rotation = Quaternion.Euler ( pitch * radToDeg, yaw * radToDeg, -roll * radToDeg);
+		this.transform.eulerAngles = new Vector3(  pitch * radToDeg,yaw * radToDeg,  roll * radToDeg );
+		//this.transform.rotation = Quaternion.Euler ( pitch * radToDeg, yaw * radToDeg, -roll * radToDeg);
+		//this.transform.rotation = Quaternion.Euler ( yaw * radToDeg, pitch * radToDeg, -roll * radToDeg);
 	}
 
 	void setFingerValue(int id, float value)
