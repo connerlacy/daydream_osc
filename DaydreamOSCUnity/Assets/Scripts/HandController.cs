@@ -40,6 +40,7 @@ public class HandController : MonoBehaviour
 	public GameObject hand;
 	private Vector3 imu;
 
+	public GameObject thumb_ps;
 	public GameObject index_ps;
 	public GameObject middle_ps;
 	public GameObject ring_ps;
@@ -97,6 +98,7 @@ public class HandController : MonoBehaviour
 		fingers.Add (thumb);
 
 		ps = new List<GameObject> ();
+		ps.Add (thumb_ps);
 		ps.Add (index_ps);
 		ps.Add (middle_ps);
 		ps.Add (ring_ps);
@@ -152,22 +154,24 @@ public class HandController : MonoBehaviour
 
 	void Update()
 	{
-		hand.transform.localEulerAngles = new Vector3(pitch * radToDeg, yaw * radToDeg, -roll * radToDeg);
+		//this.transform.eulerAngles = new Vector3(-roll * radToDeg, pitch * radToDeg, yaw * radToDeg );
+		this.transform.rotation = Quaternion.Euler ( pitch * radToDeg, yaw * radToDeg, -roll * radToDeg);
 	}
 
 	void setFingerValue(int id, float value)
 	{
+		// Set values
 		if (id / 2 == 4)
 		{
 			//Thumb
 			// If odd, it's the knuckle
 			if ( (id % 2) == 1) 
 			{
-				fingers [id / 2].knuckleT.localEulerAngles = new Vector3 (0, value, 0);
+				fingers [id / 2].knuckleT.localEulerAngles = new Vector3 (0, value / 10.0f, 0);
 			}
 			else
 			{
-				Vector3 v = new Vector3 (0, value, 0);
+				Vector3 v = new Vector3 (0, value / 2.0f, 0);
 				fingers [id / 2].j1T.localEulerAngles = v;
 				fingers [id / 2].j2T.localEulerAngles = v;
 			}
@@ -187,6 +191,7 @@ public class HandController : MonoBehaviour
 			}
 		}
 
+		// Check our values
 		foreach (var f in fingers)
 		{
 			float xSum;//= f.knuckleT.localEulerAngles.x + f.j1T.localEulerAngles.x + f.j2T.localEulerAngles.x;
@@ -208,8 +213,6 @@ public class HandController : MonoBehaviour
 			{
 				f.onOff = false;
 			}
-
-
 		}
 	}
 
@@ -227,9 +230,7 @@ public class HandController : MonoBehaviour
 
 	public void keyTrigger(int note, int velocity)
 	{
-		pluginClass.CallStatic ("sendTriggerMessage", note, velocity);
-
-		if (note < 4)
+		//if (note < 4)
 		{
 			GameObject go = Instantiate (ps[note], fingers[fingers.Count - (note + 1)].j2T.position, Quaternion.Euler(new Vector3(45,0,0))) as GameObject;
 			Destroy (go, 2);

@@ -110,6 +110,7 @@ public class OscAarPlugin
 
     public static void startOSC()
     {
+        /*
         //oscOutputThread.start();
 
         Log.d("DEBUG", "Starting OSC Output thread...");
@@ -128,7 +129,7 @@ public class OscAarPlugin
             Log.d("DEBUG",e.toString());
             return;
         }
-
+*/
         try
         {
             OSCPortIn receiver = new OSCPortIn(6666);
